@@ -2,7 +2,7 @@
 In this tutorial, we learn how to deploy nginx web server to EKS cluster. To achieve this, we would provision an EKS cluster, create worker nodes, connect the Node Group to EKS cluster and then deploy the nginx application to the EKS cluster
 
 ## Step 1: Provision EKS cluster
-To provision the cluster, we firstly create IAM role for the cluster, create VPC and then, create the cluster and connect kubectl with the cluster.
+To provision the cluster, we would first create IAM role for the cluster, create VPC and then, create the cluster and connect kubectl with the cluster.
 
 ## Create IAM role for cluster:
 We create IAM role and attach the policy, AmazonEKSClusterPolicy to the cluster role to allow AWS to create and manage components.
@@ -12,7 +12,7 @@ We create IAM role and attach the policy, AmazonEKSClusterPolicy to the cluster 
 ![Screenshot (234)](https://github.com/kenchuks44/Deploying-Nginx-Application-to-EKS-Cluster/assets/88329191/477eb50f-59f9-4339-a39a-ffa3c8c3363a)
 
 ## Create VPC:
-EKS cluster needs specific networking configuration as default VPC is not optimized for it. The VPC created is for the worker nodes. Worker nodes needs specific firewall configuration for master-worker node communication. AWS has a preconfigured template for VPC creation and we will achieve this using CloudFormation. Here, we will create a stack using Amazon S3 URL below:
+EKS cluster needs specific networking configuration as default VPC is not optimized for it. The VPC created is for the worker nodes. Worker nodes needs specific firewall configuration for master-worker node communication. AWS has a preconfigured template for VPC creation and we will achieve this using CloudFormation. Here, we will create a stack using Amazon S3 URL template below:
 ```
 https://s3.us-west-2.amazonaws.com/amazon-eks/cloudformation/2020-10-29/amazon-eks-vpc-private-subnets.yaml
 ```
@@ -58,7 +58,7 @@ We create IAM role and attach policies to enable us connect to the EKS cluster, 
 With Node Group, all required worker processes (container runtime, kubelet, kubeproxy) will be created.
 
 ## Deploy Nginx application to EKS cluster
-Here, we deploy the application using kubernetes manifest file (nginx.yaml) below:
+We now deploy the application using kubernetes manifest file (nginx.yaml) below:
 
 ```
 apiVersion: apps/v1
@@ -96,7 +96,7 @@ spec:
       targetPort: 80
   type: LoadBalancer
 ```
-Next, we run the commands to deploy the nginx web server to the cluster
+Next, we run the command below to deploy the nginx web server to the cluster
 
 ```
 kubectl apply -f nginx.yaml
@@ -105,7 +105,7 @@ kubectl apply -f nginx.yaml
 
 ![Screenshot (231)](https://github.com/kenchuks44/Deploying-Nginx-Application-to-EKS-Cluster/assets/88329191/8e866e2e-5ad4-41d5-9c49-15fabe06ab54)
 
-With the Load balancer configuration, we then access the application through the browswer using the DNS name
+From the Load balancer configuration details, we then access the application through the browswer using the DNS name
 
 ![Screenshot (243)](https://github.com/kenchuks44/Deploying-Nginx-Application-to-EKS-Cluster/assets/88329191/a78b496b-370f-483a-86af-36900acea4c9)
 
