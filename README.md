@@ -1,5 +1,5 @@
 # Deploying-Application-to-EKS-Cluster
-In this tutorial, we learn how to deploy nginx web server to EKS cluster. To achieve this, we would provision an EKS cluster, create worker nodes, connect the Node Group to EKS cluster and then deploy the nginx application to the EKS cluster
+In this project, we learn how to deploy nginx web server to EKS cluster. To achieve this, we would provision an EKS cluster, create worker nodes, connect the Node Group to EKS cluster and then deploy the nginx application to the EKS cluster
 
 ## Step 1: Provision EKS cluster
 To provision the cluster, we would first create IAM role for the cluster, create VPC and then, create the cluster and connect kubectl with the cluster.
